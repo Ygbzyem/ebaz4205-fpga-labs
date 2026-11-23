@@ -1,5 +1,7 @@
 # Lab 00 — Board Bring-up
 
+[English](README.md) | [Tiếng Việt](README.vi.md)
+
 **Status: complete** — JTAG, device identity, UART adapter and simulation toolchain verified; XADC documented as a board limitation.
 
 Goal: prove that the toolchain, JTAG cable and EBAZ4205 board work **before** any RTL is written, so that later failures can be isolated to the design instead of the setup.
@@ -8,7 +10,7 @@ Goal: prove that the toolchain, JTAG cable and EBAZ4205 board work **before** an
 
 ```
 lab00_bringup/
-├── README.md                                   # this bring-up log
+├── README.md / README.vi.md                     # this bring-up log
 └── docs/
     ├── zynq_chip_marking.png                   # photo of U31 top marking
     ├── xadc_vccadc_vendor_schematic.png        # XADC supply pins, vendor schematic
