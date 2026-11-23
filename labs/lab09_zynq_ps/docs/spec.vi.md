@@ -66,4 +66,4 @@ Ghi lại giá trị thực tế từ Address Editor.
 - [ ] Block Design (`.bd` xuất ra Tcl bằng `write_bd_tcl`) và XDC (bạn)
 - [ ] `hello_led.c` (bạn)
 - [ ] `.xsa` không đưa vào Git (đăng ở Release nếu cần)
-- [ ] Bảng cấu hình PS đã điền kèm nguồn, log UART, ảnh; README của lab (Claude)
+- [ ] Bảng cấu hình PS đã điền kèm nguồn, log UART, ảnh; README của lab

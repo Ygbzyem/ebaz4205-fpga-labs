@@ -66,4 +66,4 @@ Record the actual value from the Address Editor.
 - [ ] Block Design (`.bd` exported as Tcl with `write_bd_tcl`) and XDC (user)
 - [ ] `hello_led.c` (user)
 - [ ] `.xsa` kept out of Git (published in a Release if needed)
-- [ ] Filled-in PS configuration table with sources, UART log, photo; lab README (Claude)
+- [ ] Filled-in PS configuration table with sources, UART log, photo; lab README

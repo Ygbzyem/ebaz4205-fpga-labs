@@ -73,12 +73,6 @@ ebaz4205-fpga-labs/
 
 Module của các lab sau được liệt kê trong spec của từng lab và sẽ thêm vào đây khi đã hiện thực.
 
-## Phân công
-
-| Phần việc | Ai làm |
-|---|---|
-| RTL, constraint, code C | Phạm Minh Tùng |
-| Spec, testbench, log lab, README / tài liệu | Viết cùng Claude (trợ lý AI) |
 
 ## Bắt đầu
 

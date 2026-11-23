@@ -72,4 +72,4 @@ Thay `axi_gpio_0` của Lab 09 bằng IP `axi_led_pwm` đã đóng gói. Ứng d
 
 - [ ] `axi_lite_regs.v`, `axi_led_pwm.v`, IP đã đóng gói (`component.xml`) (bạn)
 - [ ] `pwm_demo.c` (bạn)
-- [ ] Testbench có BFM AXI4-Lite (Claude); log UART, video; README của lab kèm bản đồ thanh ghi (Claude)
+- [ ] Testbench có BFM AXI4-Lite; log UART, video; README của lab kèm bản đồ thanh ghi

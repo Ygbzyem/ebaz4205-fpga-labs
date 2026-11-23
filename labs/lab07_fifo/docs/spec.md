@@ -86,4 +86,4 @@ FSM:
 ## 7. Deliverables
 
 - [ ] `sync_fifo.v`, `line_ctrl.v`, `lab07_top.v`, `lab07_top.xdc` (user)
-- [ ] Testbenches with queue model (Claude); utilization report showing BRAM; lab README (Claude)
+- [ ] Testbenches with queue model; utilization report showing BRAM; lab README

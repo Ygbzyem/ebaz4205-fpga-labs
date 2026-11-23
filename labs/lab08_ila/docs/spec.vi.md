@@ -49,4 +49,4 @@ Ghi lại lượng LUT / FF / BRAM mà ILA dùng thêm (so với utilization c�
 - [ ] XDC debug (`lab08_debug.xdc`) sinh ra từ *Set Up Debug* (bạn)
 - [ ] File probe `.ltx` lưu cùng kết quả
 - [ ] Ảnh chụp E1–E4, bảng chênh lệch utilization
-- [ ] README của lab so sánh phần cứng và mô phỏng (Claude)
+- [ ] README của lab so sánh phần cứng và mô phỏng

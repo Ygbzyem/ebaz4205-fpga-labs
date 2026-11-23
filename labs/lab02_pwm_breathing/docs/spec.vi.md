@@ -89,5 +89,5 @@ Hành vi:
 ## 8. Sản phẩm cần nộp
 
 - [ ] `por_gen.v`, `pwm_core.v`, `breath_ctrl.v`, `lab02_top.v`, `lab02_top.xdc` (bạn)
-- [ ] Testbench `tb_pwm_core.v`, `tb_breath_ctrl.v`, `tb_lab02_top.v` (Claude)
-- [ ] Log, báo cáo, video; README của lab (Claude)
+- [ ] Testbench `tb_pwm_core.v`, `tb_breath_ctrl.v`, `tb_lab02_top.v`
+- [ ] Log, báo cáo, video; README của lab

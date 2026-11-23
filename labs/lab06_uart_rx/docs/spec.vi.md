@@ -84,4 +84,4 @@ XDC: `set_false_path -from [get_ports uart_rxd]`.
 ## 8. Sản phẩm cần nộp
 
 - [ ] `uart_rx.v`, `echo_buf.v`, `lab06_top.v`, `lab06_top.xdc` (bạn)
-- [ ] Testbench có mô hình UART TX/RX (Claude); ảnh terminal; README của lab (Claude)
+- [ ] Testbench có mô hình UART TX/RX; ảnh terminal; README của lab

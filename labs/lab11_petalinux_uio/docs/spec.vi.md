@@ -60,4 +60,4 @@ Hiện thực: mở `/dev/uio0`, `mmap` 4 KB, truy cập thanh ghi bằng `volat
 
 - [ ] Các thay đổi cấu hình project PetaLinux (`system-user.dtsi`, diff của `project-spec`) và `pwm_ctl.c` (bạn)
 - [ ] Ảnh boot không đưa vào Git (đăng ở Release)
-- [ ] Log boot, thời gian boot, kích thước image, ảnh; README của lab kèm quy trình boot (Claude)
+- [ ] Log boot, thời gian boot, kích thước image, ảnh; README của lab kèm quy trình boot

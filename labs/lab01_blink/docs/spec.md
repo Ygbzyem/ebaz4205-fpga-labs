@@ -12,15 +12,15 @@ Blink the on-board dual LED (green and red) in opposite phase at 1 Hz, clocked b
 lab01_blink/
 ├── docs/spec.md, spec.vi.md
 ├── rtl/
-│   ├── blink_core.v         # user
-│   └── lab01_top.v          # user
+│   ├── blink_core.v         # clock divider + toggle logic
+│   └── lab01_top.v          # board wrapper: power-on reset, LED polarity
 ├── constraints/
-│   └── lab01_top.xdc        # user (copy lines from board/ebaz4205_master.xdc)
+│   └── lab01_top.xdc        # pins + 50 MHz clock (lines from board/ebaz4205_master.xdc)
 ├── tb/
-│   ├── tb_blink_core.v      # Claude (provided)
-│   └── tb_lab01_top.v       # Claude (added when lab01_top exists)
+│   ├── tb_blink_core.v      # self-checking testbench for blink_core
+│   └── tb_lab01_top.v       # top-level testbench: POR length, LED polarity
 └── scripts/
-    └── create_project.tcl   # Claude
+    └── create_project.tcl   # creates the Vivado project in build/
 ```
 
 ## 3. Module Hierarchy
@@ -118,4 +118,4 @@ vivado -mode batch -source scripts\create_project.tcl
 - [ ] `TEST PASSED` logs for T1–T7
 - [ ] Utilization and timing summary in `results/`
 - [ ] Board photo or video
-- [ ] Lab README (log) — Claude
+- [ ] Lab README (log)

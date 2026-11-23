@@ -88,4 +88,4 @@ ROM thông điệp, 16 byte: `H e l l o ␠ E B A Z 4 2 0 5 \r \n` (0x48 0x65 0x
 ## 9. Sản phẩm cần nộp
 
 - [ ] `uart_tx.v`, `msg_sender.v`, `lab05_top.v`, `lab05_top.xdc` (bạn)
-- [ ] Testbench có mô hình bộ thu UART (Claude); ảnh chụp terminal; README của lab (Claude)
+- [ ] Testbench có mô hình bộ thu UART; ảnh chụp terminal; README của lab

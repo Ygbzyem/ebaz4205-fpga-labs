@@ -73,12 +73,6 @@ ebaz4205-fpga-labs/
 
 Modules of later labs are listed in each lab's spec and added here when implemented.
 
-## Roles
-
-| Part | Who |
-|---|---|
-| RTL, constraints, C code | Phạm Minh Tùng |
-| Specs, testbenches, lab logs, README / docs | Written with Claude (AI assistant) |
 
 ## Getting Started
 

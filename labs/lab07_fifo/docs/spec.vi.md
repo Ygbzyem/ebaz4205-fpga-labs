@@ -86,4 +86,4 @@ FSM:
 ## 7. Sản phẩm cần nộp
 
 - [ ] `sync_fifo.v`, `line_ctrl.v`, `lab07_top.v`, `lab07_top.xdc` (bạn)
-- [ ] Testbench có mô hình hàng đợi (Claude); báo cáo utilization cho thấy BRAM; README của lab (Claude)
+- [ ] Testbench có mô hình hàng đợi; báo cáo utilization cho thấy BRAM; README của lab

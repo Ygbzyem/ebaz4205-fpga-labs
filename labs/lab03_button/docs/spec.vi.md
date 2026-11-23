@@ -97,4 +97,4 @@ Thêm vào XDC: `set_property PULLUP true [get_ports btn_n]`; `set_false_path -f
 ## 9. Sản phẩm cần nộp
 
 - [ ] `sync_2ff.v`, `debounce.v`, `edge_detect.v`, `lab03_top.v`, `lab03_top.xdc` (bạn)
-- [ ] Testbench (Claude); log, báo cáo, ảnh cách nối dây; README của lab (Claude)
+- [ ] Testbench; log, báo cáo, ảnh cách nối dây; README của lab

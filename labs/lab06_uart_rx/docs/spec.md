@@ -84,4 +84,4 @@ XDC: `set_false_path -from [get_ports uart_rxd]`.
 ## 8. Deliverables
 
 - [ ] `uart_rx.v`, `echo_buf.v`, `lab06_top.v`, `lab06_top.xdc` (user)
-- [ ] Testbenches with UART TX/RX models (Claude); terminal screenshot; lab README (Claude)
+- [ ] Testbenches with UART TX/RX models; terminal screenshot; lab README

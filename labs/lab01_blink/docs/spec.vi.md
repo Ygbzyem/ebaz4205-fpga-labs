@@ -12,15 +12,15 @@ Nháy LED kép trên board (xanh và đỏ) ngược pha nhau với tần số 1
 lab01_blink/
 ├── docs/spec.md, spec.vi.md
 ├── rtl/
-│   ├── blink_core.v         # bạn viết
-│   └── lab01_top.v          # bạn viết
+│   ├── blink_core.v         # bộ chia tần + logic đảo LED
+│   └── lab01_top.v          # lớp bọc board: reset khi bật nguồn, cực tính LED
 ├── constraints/
-│   └── lab01_top.xdc        # bạn viết (chép dòng từ board/ebaz4205_master.xdc)
+│   └── lab01_top.xdc        # gán chân + clock 50 MHz (lấy dòng từ board/ebaz4205_master.xdc)
 ├── tb/
-│   ├── tb_blink_core.v      # Claude (đã có)
-│   └── tb_lab01_top.v       # Claude (thêm khi đã có lab01_top)
+│   ├── tb_blink_core.v      # testbench tự kiểm tra cho blink_core
+│   └── tb_lab01_top.v       # testbench cấp top: độ dài POR, cực tính LED
 └── scripts/
-    └── create_project.tcl   # Claude
+    └── create_project.tcl   # tạo project Vivado trong build/
 ```
 
 ## 3. Phân cấp module
@@ -118,4 +118,4 @@ vivado -mode batch -source scripts\create_project.tcl
 - [ ] Log `TEST PASSED` của T1–T7
 - [ ] Báo cáo utilization và timing trong `results/`
 - [ ] Ảnh hoặc video board
-- [ ] README của lab (log) — Claude
+- [ ] README của lab (log)

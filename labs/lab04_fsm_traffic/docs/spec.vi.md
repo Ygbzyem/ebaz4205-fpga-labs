@@ -96,4 +96,4 @@ Bộ định thời pha `t` đếm số tick đã ở trong trạng thái hiện
 ## 7. Sản phẩm cần nộp
 
 - [ ] `tick_gen.v`, `traffic_fsm.v`, `lab04_top.v`, `lab04_top.xdc` (bạn); sơ đồ trạng thái do bạn vẽ
-- [ ] Testbench có mô hình tham chiếu (Claude); log, báo cáo, video; README của lab (Claude)
+- [ ] Testbench có mô hình tham chiếu; log, báo cáo, video; README của lab

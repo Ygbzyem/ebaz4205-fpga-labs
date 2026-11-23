@@ -72,4 +72,4 @@ Replace `axi_gpio_0` of Lab 09 with the packaged `axi_led_pwm`. Bare-metal app `
 
 - [ ] `axi_lite_regs.v`, `axi_led_pwm.v`, packaged IP (`component.xml`) (user)
 - [ ] `pwm_demo.c` (user)
-- [ ] Testbench with AXI4-Lite BFM (Claude); UART log, video; lab README with register map (Claude)
+- [ ] Testbench with AXI4-Lite BFM; UART log, video; lab README with register map

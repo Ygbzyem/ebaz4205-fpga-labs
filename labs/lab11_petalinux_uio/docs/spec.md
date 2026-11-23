@@ -60,4 +60,4 @@ Implementation: open `/dev/uio0`, `mmap` 4 KB, access registers with `volatile u
 
 - [ ] PetaLinux project config changes (`system-user.dtsi`, `project-spec` diffs) and `pwm_ctl.c` (user)
 - [ ] Boot images kept out of Git (published in a Release)
-- [ ] Boot log, boot time, image sizes, photo; lab README with the boot flow (Claude)
+- [ ] Boot log, boot time, image sizes, photo; lab README with the boot flow

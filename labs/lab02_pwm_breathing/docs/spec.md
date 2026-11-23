@@ -89,5 +89,5 @@ Behavior:
 ## 8. Deliverables
 
 - [ ] `por_gen.v`, `pwm_core.v`, `breath_ctrl.v`, `lab02_top.v`, `lab02_top.xdc` (user)
-- [ ] Testbenches `tb_pwm_core.v`, `tb_breath_ctrl.v`, `tb_lab02_top.v` (Claude)
-- [ ] Logs, reports, video; lab README (Claude)
+- [ ] Testbenches `tb_pwm_core.v`, `tb_breath_ctrl.v`, `tb_lab02_top.v`
+- [ ] Logs, reports, video; lab README

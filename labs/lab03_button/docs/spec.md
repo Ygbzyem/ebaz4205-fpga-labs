@@ -97,4 +97,4 @@ XDC additions: `set_property PULLUP true [get_ports btn_n]`; `set_false_path -fr
 ## 9. Deliverables
 
 - [ ] `sync_2ff.v`, `debounce.v`, `edge_detect.v`, `lab03_top.v`, `lab03_top.xdc` (user)
-- [ ] Testbenches (Claude); logs, reports, photo of the wiring; lab README (Claude)
+- [ ] Testbenches; logs, reports, photo of the wiring; lab README

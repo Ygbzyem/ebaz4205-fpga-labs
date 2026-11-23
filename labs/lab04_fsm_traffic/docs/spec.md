@@ -96,4 +96,4 @@ A phase timer `t` counts ticks spent in the current state; it is cleared on ever
 ## 7. Deliverables
 
 - [ ] `tick_gen.v`, `traffic_fsm.v`, `lab04_top.v`, `lab04_top.xdc` (user); state diagram drawn by the user
-- [ ] Testbenches with a reference model (Claude); logs, reports, video; lab README (Claude)
+- [ ] Testbenches with a reference model; logs, reports, video; lab README

@@ -88,4 +88,4 @@ Message ROM, 16 bytes: `H e l l o ␠ E B A Z 4 2 0 5 \r \n` (0x48 0x65 0x6C 0x6
 ## 9. Deliverables
 
 - [ ] `uart_tx.v`, `msg_sender.v`, `lab05_top.v`, `lab05_top.xdc` (user)
-- [ ] Testbenches with UART receiver model (Claude); terminal screenshot; lab README (Claude)
+- [ ] Testbenches with UART receiver model; terminal screenshot; lab README
