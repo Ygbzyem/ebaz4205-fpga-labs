@@ -1,5 +1,7 @@
 # Lab 00 — Board Bring-up
 
+**Status: complete** — JTAG, device identity, UART adapter and simulation toolchain verified; XADC documented as a board limitation.
+
 Goal: prove that the toolchain, JTAG cable and EBAZ4205 board work **before** any RTL is written, so that later failures can be isolated to the design instead of the setup.
 
 ## Lab Structure
@@ -8,6 +10,7 @@ Goal: prove that the toolchain, JTAG cable and EBAZ4205 board work **before** an
 lab00_bringup/
 ├── README.md                                   # this bring-up log
 └── docs/
+    ├── zynq_chip_marking.png                   # photo of U31 top marking
     ├── xadc_vccadc_vendor_schematic.png        # XADC supply pins, vendor schematic
     └── xadc_vccadc_kicad_schematic.png         # same area, community KiCad redraw
 ```
@@ -23,20 +26,24 @@ lab00_bringup/
 | Device identity via IDCODE | `0x13722093` → `xc7z010` | ✅ |
 | PL configuration state | Unconfigured (`DONE = 0`), as expected | ✅ |
 | XADC readout | All channels 0 — XADC unpowered on this board | ⚠️ board limitation |
-| Chip marking (package / speed / temp grade) | pending | ⏳ |
-| Tool versions (Vivado, Icarus, GTKWave) | pending | ⏳ |
-| USB-UART loopback (CH343P) | pending | ⏳ |
-| PS UART J7 | pending | ⏳ |
-| Simulation toolchain RED test (`tb_blink_core` without RTL) | pending | ⏳ |
+| Chip marking (package / speed / temp grade) | `XC7Z010` `CLG400` `1C` → `xc7z010clg400-1`, commercial | ✅ |
+| Vivado version | v2020.2 (64-bit), SW Build 3064766 | ✅ |
+| Git | 2.55.0.windows.2 | ✅ |
+| Icarus Verilog / GTKWave on Windows | Not installed — installer blocked by a SmartScreen *Malicious file* warning; to be installed from Ubuntu packages via WSL | ⏭️ deferred |
+| USB-UART loopback (CH343P) | Typed characters echoed | ✅ |
+| PS UART J7 | No output, no input echo — expected (SD boot, no SD card) | ✅ (expected) |
+| Simulation toolchain RED test (`tb_blink_core` without RTL) | Vivado xsim: `Module <blink_core> not found` as expected | ✅ |
 
 ## 1. Environment
 
 | Item | Value |
 |---|---|
 | Host OS | Windows 11 |
-| Vivado | pending (`vivado -version`) |
-| Icarus Verilog / GTKWave | pending (`iverilog -V`, `gtkwave --version`) |
-| Git remote | `github.com/Ygbzyem/ebaz4205-fpga-labs` (3 initial commits pushed) |
+| Vivado | v2020.2 (64-bit), SW Build 3064766, IP Build 3064653 |
+| Vivado simulator | xsim 2020.2 (`xvlog` / `xelab` / `xsim`, already on PATH) |
+| Icarus Verilog / GTKWave | Deferred: Windows installer blocked by SmartScreen; plan: `apt install iverilog gtkwave` in WSL Ubuntu |
+| Git | 2.55.0.windows.2 |
+| Git remote | `github.com/Ygbzyem/ebaz4205-fpga-labs` over HTTPS (push works; SSH not used) |
 
 ## 2. Board
 
@@ -50,7 +57,20 @@ lab00_bringup/
 | PL oscillator | X5, 50 MHz |
 | Schematic reference | [xjtuecho/EBAZ4205](https://github.com/xjtuecho/EBAZ4205) (MIT) |
 
-### Device resources (Vivado part database, `xc7z010clg400`)
+### Chip marking (U31)
+
+| Line | Marking | Meaning |
+|---|---|---|
+| Device | `XC7Z010` | Zynq-7010 |
+| Package | `CLG400...` | CLG400 BGA |
+| Grade | `1C` | Speed grade -1, commercial temperature range |
+| Vivado part | `xc7z010clg400-1` | Used for all labs |
+
+The vendor schematic labels U31 as `XC7Z010-1CLG400I` (industrial), but the fitted chip is a commercial (`C`) part. The marking on the chip is the source of truth.
+
+![U31 chip marking](docs/zynq_chip_marking.png)
+
+### Device resources (Vivado part database, `xc7z010clg400-1`)
 
 | Resource | Count |
 |---|---|
@@ -133,18 +153,38 @@ The XADC is **not powered** on this board as shipped, so it cannot be used for t
 
 | Test | Setup | Result |
 |---|---|---|
-| Adapter loopback | CH343P TX shorted to RX, Tera Term 115200 8N1 | pending |
-| PS UART J7 | TX↔RX crossed, GND, no VCC, 3.3 V level | pending (no output expected without an SD card) |
+| Adapter loopback | CH343P TX shorted to RX, 115200 8N1 | ✅ Typed characters echoed → driver, COM port and adapter OK |
+| PS UART J7 | TX↔RX crossed, GND, no VCC, PuTTY 115200 8N1 | Blank, keystrokes not echoed. Expected: the board boots from SD and no card is inserted, so no software runs on the PS to drive the UART. To be re-tested in Lab 09 (bare-metal on PS) |
 
 ## 6. Simulation Toolchain
 
-```sh
-cd labs/lab01_blink
-mkdir -p build
-iverilog -g2001 -Wall -o build/sim tb/tb_blink_core.v
+TDD RED test: the Lab 01 testbench must fail to elaborate before `blink_core` exists.
+
+Vivado xsim (Windows `cmd`):
+
+```bat
+cd C:\GitHub\ebaz4205-fpga-labs\labs\lab01_blink
+xvlog tb\tb_blink_core.v
+xelab tb_blink_core -s tb_sim
 ```
 
-Expected: `Unknown module type: blink_core` (TDD RED state before Lab 01 RTL exists). Result: pending.
+Result:
+
+```
+INFO: [VRFC 10-311] analyzing module tb_blink_core
+ERROR: [VRFC 10-2063] Module <blink_core> not found while processing module instance <dut> [.../tb/tb_blink_core.v:42]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.
+```
+
+✅ Expected RED state. `xvlog` and `xelab` were already on PATH, so `settings64.bat` was not needed. The generated `xsim.dir/`, `*.log` and `*.pb` files are covered by `.gitignore`.
+
+Icarus Verilog (planned, WSL Ubuntu):
+
+```sh
+cd /mnt/c/GitHub/ebaz4205-fpga-labs/labs/lab01_blink
+mkdir -p build
+iverilog -g2001 -Wall -o build/sim tb/tb_blink_core.v   # expected: Unknown module type: blink_core
+```
 
 ## Issues and Lessons
 
@@ -152,3 +192,6 @@ Expected: `Unknown module type: blink_core` (TDD RED state before Lab 01 RTL exi
 |---|---|---|
 | `Labtoolstcl 44-586` on `connect_hw_server` | hw_server connection already open (GUI auto-connect) | Reuse the connection or disconnect first |
 | XADC reads 0 / -273.1 °C | `VCCADC_0` has no supply on this board | Documented as a board limitation |
+| `vivado -version` in the Vivado Tcl console prints `Common 17-259` warning | It is an OS command, not a Tcl command | Run it in a terminal, or use `version` in the Tcl console |
+| Icarus Windows installer flagged as *Malicious file* by SmartScreen | Unverified third-party binary | Not run; use Vivado xsim now, Ubuntu packages via WSL later |
+| Schematic says `-1CLG400I`, chip says `1C` | Fitted part differs from the part drawn in the schematic | Use the chip marking (`xc7z010clg400-1`) |

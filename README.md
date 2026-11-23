@@ -8,12 +8,12 @@ Hands-on RTL labs on the EBAZ4205 (Xilinx Zynq-7010) board, from LED blink to UA
 
 | Item | Value |
 |---|---|
-| SoC | Xilinx Zynq-7010, XC7Z010CLG400 (speed grade: pending) |
+| SoC | Xilinx Zynq-7010, `xc7z010clg400-1` (marking `1C`: speed -1, commercial) |
 | PL clock | 50 MHz oscillator (X5) |
 | Debug | JTAG (J8), PS UART (J7) via CH343P USB-UART |
 | Power | 12 V via J4 (D24 fitted) |
 | XADC | Not available: `VCCADC_0` unpowered on this board (see [Lab 00](labs/lab00_bringup/README.md)) |
-| Tools | Vivado (version: pending), Icarus Verilog, GTKWave |
+| Tools | Vivado 2020.2 (incl. xsim), Icarus Verilog + GTKWave (WSL) |
 
 ## Project Structure
 
@@ -42,7 +42,7 @@ ebaz4205-fpga-labs/
 
 | Lab | Topic | Key concepts | Status |
 |---|---|---|---|
-| 00 | Board bring-up | JTAG chain, IDCODE, XADC, environment | in progress (JTAG ✅, XADC ⚠️) |
+| 00 | Board bring-up | JTAG chain, IDCODE, XADC, environment | ✅ done (XADC unavailable on this board) |
 | 01 | LED blink | Clock divider, synchronous reset, bit width | in progress |
 | 02 | PWM breathing LED | Duty cycle, compare | planned |
 | 03 | External button | 2-FF synchronizer, debounce, edge detect | planned |
@@ -66,9 +66,14 @@ git clone git@github.com:<your-username>/ebaz4205-fpga-labs.git
 cd ebaz4205-fpga-labs/labs/lab01_blink
 mkdir -p build
 
-# Simulation (repeat with HALF_PERIOD = 2, 5, 16)
+# Simulation with Icarus (repeat with HALF_PERIOD = 2, 5, 16)
 iverilog -g2001 -Wall -Ptb_blink_core.HALF_PERIOD=5 -o build/sim tb/tb_blink_core.v rtl/blink_core.v
 vvp build/sim            # add +vcd to dump a waveform, open it with gtkwave
+
+# Simulation with Vivado xsim (Windows cmd)
+xvlog tb/tb_blink_core.v rtl/blink_core.v
+xelab tb_blink_core -s tb_sim
+xsim tb_sim -R
 
 # Synthesis, implementation, bitstream
 vivado -mode batch -source scripts/build.tcl
