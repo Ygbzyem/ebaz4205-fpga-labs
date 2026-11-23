@@ -1,0 +1,39 @@
+# ---- Build outputs (Vivado non-project flow writes here) ----
+build/
+
+# ---- Vivado ----
+.Xil/
+*.jou
+*.log
+*.str
+*.backup.*
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.gen/
+*.ip_user_files/
+xsim.dir/
+*.wdb
+*.pb
+
+# Keep curated reports and logs in results/
+!labs/*/results/**
+
+# ---- Simulation ----
+*.vcd
+*.fst
+*.vvp
+a.out
+
+# ---- Bitstreams (publish via GitHub Releases instead) ----
+*.bit
+*.bin
+*.xsa
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.swp
