@@ -14,6 +14,7 @@ build/
 *.gen/
 *.ip_user_files/
 xsim.dir/
+*.xpr
 *.wdb
 *.pb
 

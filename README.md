@@ -12,6 +12,7 @@ Hands-on RTL labs on the EBAZ4205 (Xilinx Zynq-7010) board, from LED blink to UA
 | PL clock | 50 MHz oscillator (X5) |
 | Debug | JTAG (J8), PS UART (J7) via CH343P USB-UART |
 | Power | 12 V via J4 (D24 fitted) |
+| XADC | Not available: `VCCADC_0` unpowered on this board (see [Lab 00](labs/lab00_bringup/README.md)) |
 | Tools | Vivado (version: pending), Icarus Verilog, GTKWave |
 
 ## Project Structure
@@ -23,9 +24,11 @@ ebaz4205-fpga-labs/
 ├── .gitignore
 ├── board/
 │   ├── ebaz4205_master.xdc     # board pin constraints (all lines commented)
-│   └── docs/                   # board photos, power / JTAG notes, bring-up log
+│   └── docs/                   # board photos, power / JTAG notes
 └── labs/
-    ├── lab00_bringup/          # JTAG chain, XADC readout, environment check
+    ├── lab00_bringup/          # bring-up log: JTAG chain, IDCODE, XADC finding
+    │   ├── README.md
+    │   └── docs/               # schematic evidence
     └── lab01_blink/
         ├── docs/spec.md        # interface, timing, behavior, open questions
         ├── rtl/                # synthesizable Verilog-2001
@@ -39,7 +42,7 @@ ebaz4205-fpga-labs/
 
 | Lab | Topic | Key concepts | Status |
 |---|---|---|---|
-| 00 | Board bring-up | JTAG chain, XADC, environment | in progress |
+| 00 | Board bring-up | JTAG chain, IDCODE, XADC, environment | in progress (JTAG ✅, XADC ⚠️) |
 | 01 | LED blink | Clock divider, synchronous reset, bit width | in progress |
 | 02 | PWM breathing LED | Duty cycle, compare | planned |
 | 03 | External button | 2-FF synchronizer, debounce, edge detect | planned |
