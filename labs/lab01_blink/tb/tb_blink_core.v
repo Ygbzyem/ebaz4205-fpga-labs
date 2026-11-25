@@ -90,7 +90,7 @@ module tb_blink_core;
             if (led_g !== m_led || led_r !== ~m_led) begin
                 errors = errors + 1;
                 if (errors <= MAX_ERRORS)
-                    $display("[%0t ns] ERROR: rst=%b led_g=%b led_r=%b, expected led_g=%b led_r=%b (model cnt=%0d)",
+                    $display("[%0d ns] ERROR: rst=%b led_g=%b led_r=%b, expected led_g=%b led_r=%b (model cnt=%0d)",
                              $time, rst, led_g, led_r, m_led, ~m_led, m_cnt);
             end
             if (led_g !== prev_led_g && prev_led_g !== 1'bx)
