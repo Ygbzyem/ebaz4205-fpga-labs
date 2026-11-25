@@ -2,7 +2,7 @@
 
 [English](README.md) | [Tiếng Việt](README.vi.md)
 
-**Trạng thái: đã xong mô phỏng — chưa chạy trên board.**
+**Trạng thái: hoàn thành** — mô phỏng PASS, đạt timing ở 50 MHz sau implementation, xác nhận cấu hình xong (`DONE = 1`), LED nháy 1 Hz trên board.
 
 LED xanh và đỏ luân phiên ở 1 Hz (mỗi màu 0.5 s), dùng clock 50 MHz của PL. Đặc tả: [docs/spec.vi.md](docs/spec.vi.md).
 
@@ -22,7 +22,10 @@ lab01_blink/
 │   └── tb_lab01_top.v           # tự kiểm tra, độ dài POR + cực tính, T6–T7
 ├── scripts/
 │   └── create_project.tcl       # project Vivado trong build/
-└── results/                     # báo cáo timing / utilization, ảnh board (chưa có)
+└── results/
+    ├── lab01_top_utilization_synth.rpt   # utilization sau synthesis
+    ├── timing_summary.png                # Design Timing Summary
+    └── board_blink_green_red.jpg         # board: pha xanh / pha đỏ
 ```
 
 ## Danh sách module
@@ -69,15 +72,43 @@ Các testbench cũng đã được thử với những thiết kế cố ý gài
 
 ## Kết quả hiện thực và chạy trên board
 
-| Mục | Kết quả |
+### Utilization (sau synthesis, `results/lab01_top_utilization_synth.rpt`)
+
+| Tài nguyên | Dùng | Có sẵn | % |
+|---|---|---|---|
+| Slice LUT | 36 | 17 600 | 0.20 |
+| Flip-flop (toàn bộ là `FDRE`, reset đồng bộ + CE) | 31 | 35 200 | 0.09 |
+| Latch | 0 | — | — |
+| Block RAM / DSP | 0 / 0 | 60 / 80 | 0 |
+| Bonded IOB | 3 | 100 | 3.00 |
+| BUFG | 1 | 32 | 3.13 |
+
+31 flip-flop = 25 (`cnt`) + 1 (`led_g`) + 5 (`por_cnt`). `por_cnt` khai báo 8 bit nhưng dừng ở 16, nên bit [7:5] luôn bằng 0 và bị synthesis loại bỏ — khớp với số đếm. 0 latch xác nhận RTL đồng bộ và được gán đầy đủ.
+
+### Timing sau implementation (`results/timing_summary.png`)
+
+| Chỉ số | Giá trị |
 |---|---|
-| Warning synthesis (latch / critical) | chưa có |
-| Utilization (LUT / FF) | chưa có |
-| Timing ở 50 MHz (WNS / TNS / WHS) | chưa có |
-| `check_timing`: clock chưa constrain | chưa có |
-| `REGISTER.IR` `DONE` sau khi nạp | chưa có |
-| Trạng thái LED Done sau khi nạp | chưa có |
-| Quan sát: 10 chu kỳ đầy đủ (bấm giờ / video) | chưa có (kỳ vọng ≈ 10 s) |
+| WNS (setup) | 16.378 ns |
+| TNS | 0.000 ns |
+| WHS (hold) | 0.243 ns |
+| THS | 0.000 ns |
+| WPWS (độ rộng xung) | 9.500 ns |
+| Endpoint vi phạm | 0 trên 62 |
+| Thông báo của công cụ | All user specified timing constraints are met |
+
+Đường xấu nhất dùng 20 − 16.378 = 3.622 ns trong chu kỳ 20 ns, nên thiết kế này đạt timing tới khoảng 1 / 3.622 ns ≈ 276 MHz (ước lượng; chưa tính thay đổi clock uncertainty ở tần số khác).
+
+### Board
+
+![Board: pha xanh và pha đỏ](results/board_blink_green_red.jpg)
+
+| Kiểm tra | Kết quả |
+|---|---|
+| LED6 luân phiên xanh / đỏ | ✅ quan sát được |
+| Chu kỳ nháy | ✅ 1.00 s cho một chu kỳ xanh + đỏ (30 khung ở 30 fps, đo 4 chu kỳ liên tiếp trong video 5.1 s) |
+| `REGISTER.IR` sau khi nạp | ✅ `110101`: `DONE` = 1, `INIT_COMPLETE` = 1, `ISC_DONE` = 1, `ISC_ENABLED` = 0 (trước khi nạp ở Lab 00: `000001`) |
+| Trạng thái LED Done sau khi nạp | chưa ghi lại |
 
 ## Lỗi gặp phải trong quá trình làm
 

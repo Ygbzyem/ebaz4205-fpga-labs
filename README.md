@@ -51,7 +51,7 @@ ebaz4205-fpga-labs/
 | Lab | Folder | Topic | Key concepts | Spec | Status |
 |---|---|---|---|---|---|
 | 00 | [`lab00_bringup`](labs/lab00_bringup/README.md) | Board bring-up | JTAG chain, IDCODE, XADC, environment | — | ✅ done |
-| 01 | [`lab01_blink`](labs/lab01_blink/README.md) | LED blink | Clock divider, power-on reset, active-low outputs | v1.0 | 🔄 in progress |
+| 01 | [`lab01_blink`](labs/lab01_blink/README.md) | LED blink | Clock divider, power-on reset, active-low outputs | v1.0 | ✅ done |
 | 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/docs/spec.md) | Breathing LED | PWM, glitch-free duty update, module reuse | v1.0 | planned |
 | 03 | [`lab03_button`](labs/lab03_button/docs/spec.md) | External button | 2-FF synchronizer, debounce, edge detect | v1.0 | planned |
 | 04 | [`lab04_fsm_traffic`](labs/lab04_fsm_traffic/docs/spec.md) | Traffic-light FSM | Moore FSM, state encoding, timers | v1.0 | planned |
@@ -108,7 +108,7 @@ Results are only reported from real tool reports and on-board tests.
 
 | Lab | Simulation | LUT / FF | WNS (ns) | On-board |
 |---|---|---|---|---|
-| 01 | ✅ PASS (xsim + Icarus) | pending | pending | pending |
+| 01 | ✅ PASS (xsim + Icarus) | 36 / 31 | 16.378 | ✅ 1 Hz blink |
 
 ## Acknowledgements
 

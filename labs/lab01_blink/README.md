@@ -2,7 +2,7 @@
 
 [English](README.md) | [Tiếng Việt](README.vi.md)
 
-**Status: simulation complete — board test pending.**
+**Status: complete** — simulation PASS, timing met at 50 MHz after implementation, configuration confirmed (`DONE = 1`), LEDs blink at 1 Hz on the board.
 
 Green and red LEDs alternate at 1 Hz (0.5 s each), clocked by the 50 MHz PL oscillator. Specification: [docs/spec.md](docs/spec.md).
 
@@ -22,7 +22,10 @@ lab01_blink/
 │   └── tb_lab01_top.v           # self-checking, POR length + polarity, T6–T7
 ├── scripts/
 │   └── create_project.tcl       # Vivado project in build/
-└── results/                     # timing / utilization reports, board photo (pending)
+└── results/
+    ├── lab01_top_utilization_synth.rpt   # post-synthesis utilization
+    ├── timing_summary.png                # Design Timing Summary
+    └── board_blink_green_red.jpg         # board: green phase / red phase
 ```
 
 ## Module Index
@@ -69,15 +72,43 @@ The testbenches were also checked against deliberately broken designs (off-by-on
 
 ## Implementation and Board Results
 
-| Item | Result |
+### Utilization (post-synthesis, `results/lab01_top_utilization_synth.rpt`)
+
+| Resource | Used | Available | Util % |
+|---|---|---|---|
+| Slice LUTs | 36 | 17 600 | 0.20 |
+| Flip-flops (all `FDRE`, synchronous reset + CE) | 31 | 35 200 | 0.09 |
+| Latches | 0 | — | — |
+| Block RAM / DSP | 0 / 0 | 60 / 80 | 0 |
+| Bonded IOB | 3 | 100 | 3.00 |
+| BUFG | 1 | 32 | 3.13 |
+
+31 flip-flops = 25 (`cnt`) + 1 (`led_g`) + 5 (`por_cnt`). `por_cnt` is declared 8 bits but stops at 16, so bits [7:5] stay 0 and are removed by synthesis — this matches the count. 0 latches confirms the synchronous, fully-assigned RTL.
+
+### Timing after implementation (`results/timing_summary.png`)
+
+| Metric | Value |
 |---|---|
-| Synthesis warnings (latch / critical) | pending |
-| Utilization (LUT / FF) | pending |
-| Timing at 50 MHz (WNS / TNS / WHS) | pending |
-| `check_timing` unconstrained clocks | pending |
-| `REGISTER.IR` `DONE` after programming | pending |
-| Done LED state after programming | pending |
-| Visual: 10 full cycles (stopwatch / video) | pending (expected ≈ 10 s) |
+| WNS (setup) | 16.378 ns |
+| TNS | 0.000 ns |
+| WHS (hold) | 0.243 ns |
+| THS | 0.000 ns |
+| WPWS (pulse width) | 9.500 ns |
+| Failing endpoints | 0 of 62 |
+| Tool message | All user specified timing constraints are met |
+
+Worst path uses 20 − 16.378 = 3.622 ns of the 20 ns period, so this design would close timing up to roughly 1 / 3.622 ns ≈ 276 MHz (estimate; it ignores clock uncertainty changes at other frequencies).
+
+### Board
+
+![Board: green phase and red phase](results/board_blink_green_red.jpg)
+
+| Check | Result |
+|---|---|
+| LED6 alternates green / red | ✅ observed |
+| Blink period | ✅ 1.00 s per full green + red cycle (30 frames at 30 fps, 4 consecutive cycles measured in a 5.1 s video) |
+| `REGISTER.IR` after programming | ✅ `110101`: `DONE` = 1, `INIT_COMPLETE` = 1, `ISC_DONE` = 1, `ISC_ENABLED` = 0 (before programming in Lab 00: `000001`) |
+| Done LED state after programming | not recorded |
 
 ## Issues Found During Development
 

@@ -51,7 +51,7 @@ ebaz4205-fpga-labs/
 | Lab | Thư mục | Chủ đề | Khái niệm chính | Spec | Trạng thái |
 |---|---|---|---|---|---|
 | 00 | [`lab00_bringup`](labs/lab00_bringup/README.vi.md) | Bring-up board | JTAG chain, IDCODE, XADC, môi trường | — | ✅ xong |
-| 01 | [`lab01_blink`](labs/lab01_blink/README.vi.md) | Nháy LED | Chia tần, reset khi bật nguồn, ngõ ra active-low | v1.0 | 🔄 đang làm |
+| 01 | [`lab01_blink`](labs/lab01_blink/README.vi.md) | Nháy LED | Chia tần, reset khi bật nguồn, ngõ ra active-low | v1.0 | ✅ xong |
 | 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/docs/spec.vi.md) | LED "thở" | PWM, cập nhật duty không glitch, tái sử dụng module | v1.0 | dự kiến |
 | 03 | [`lab03_button`](labs/lab03_button/docs/spec.vi.md) | Nút nhấn ngoài | Synchronizer 2 FF, debounce, phát hiện cạnh | v1.0 | dự kiến |
 | 04 | [`lab04_fsm_traffic`](labs/lab04_fsm_traffic/docs/spec.vi.md) | FSM đèn giao thông | FSM Moore, mã hoá trạng thái, bộ định thời | v1.0 | dự kiến |
@@ -108,7 +108,7 @@ Chỉ ghi kết quả lấy từ báo cáo thật của công cụ và từ lầ
 
 | Lab | Mô phỏng | LUT / FF | WNS (ns) | Trên board |
 |---|---|---|---|---|
-| 01 | ✅ PASS (xsim + Icarus) | chưa có | chưa có | chưa có |
+| 01 | ✅ PASS (xsim + Icarus) | 36 / 31 | 16.378 | ✅ nháy 1 Hz |
 
 ## Ghi nhận
 
