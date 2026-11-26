@@ -1,0 +1,186 @@
+[
+ {
+  "type": "software",
+  "title": "EBAZ4205: A 5$ Xilinx ZYNQ development board",
+  "author": [
+   {
+    "literal": "xjtuecho"
+   }
+  ],
+  "publisher": "GitHub",
+  "URL": "https://github.com/xjtuecho/EBAZ4205",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ebaz"
+ },
+ {
+  "type": "report",
+  "title": "Zynq 7000 SoC Technical Reference Manual",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG585",
+  "URL": "https://docs.amd.com/r/en-US/ug585-zynq-7000-SoC-TRM",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug585"
+ },
+ {
+  "type": "report",
+  "title": "Vivado Design Suite User Guide: Synthesis",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG901",
+  "URL": "https://docs.amd.com/r/en-US/ug901-vivado-synthesis",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug901"
+ },
+ {
+  "type": "report",
+  "title": "7 Series FPGAs Configurable Logic Block User Guide",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG474",
+  "URL": "https://docs.amd.com/r/en-US/ug474_7Series_CLB",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug474"
+ },
+ {
+  "type": "report",
+  "title": "Vivado Design Suite User Guide: Using Constraints",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG903",
+  "URL": "https://docs.amd.com/r/en-US/ug903-vivado-using-constraints",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug903"
+ },
+ {
+  "type": "report",
+  "title": "Vivado Design Suite User Guide: Programming and Debugging",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG908",
+  "URL": "https://docs.amd.com/r/en-US/ug908-vivado-programming-debugging",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug908"
+ },
+ {
+  "type": "standard",
+  "title": "IEEE Standard Verilog Hardware Description Language",
+  "author": [
+   {
+    "literal": "IEEE"
+   }
+  ],
+  "publisher": "IEEE",
+  "number": "IEEE Std 1364-2001",
+  "issued": {
+   "date-parts": [
+    [
+     2001,
+     9,
+     28
+    ]
+   ]
+  },
+  "URL": "https://standards.ieee.org/ieee/1364/2052/",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ieee1364"
+ },
+ {
+  "type": "report",
+  "title": "7 Series FPGAs and Zynq-7000 SoC XADC Dual 12-Bit 1 MSPS Analog-to-Digital Converter User Guide",
+  "author": [
+   {
+    "literal": "AMD"
+   }
+  ],
+  "publisher": "AMD",
+  "number": "UG480",
+  "URL": "https://docs.amd.com/r/en-US/ug480_7Series_XADC/7-Series-FPGAs-and-Zynq-7000-SoC-XADC-Dual-12-Bit-1-MSPS-Analog-to-Digital-Converter-User-Guide-UG480",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     26
+    ]
+   ]
+  },
+  "id": "ug480"
+ }
+]
