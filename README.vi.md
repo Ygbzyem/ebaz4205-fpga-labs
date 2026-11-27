@@ -35,7 +35,7 @@ ebaz4205-fpga-labs/
 └── labs/
     ├── lab00_bringup/                 # log bring-up (README.md / README.vi.md)
     ├── lab01_blink/
-    │   ├── docs/spec.md, spec.vi.md   # giao tiếp, timing, hành vi, kế hoạch kiểm tra
+    │   ├── docs/                      # spec.md / spec.vi.md, báo cáo lab (.docx EN + VI)
     │   ├── rtl/                       # Verilog-2001 tổng hợp được (bạn viết)
     │   ├── tb/                        # testbench tự kiểm tra
     │   ├── constraints/               # XDC của lab
@@ -52,8 +52,8 @@ ebaz4205-fpga-labs/
 |---|---|---|---|---|---|
 | 00 | [`lab00_bringup`](labs/lab00_bringup/README.vi.md) | Bring-up board | JTAG chain, IDCODE, XADC, môi trường | — | ✅ xong |
 | 01 | [`lab01_blink`](labs/lab01_blink/README.vi.md) | Nháy LED | Chia tần, reset khi bật nguồn, ngõ ra active-low | v1.0 | ✅ xong |
-| 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/docs/spec.vi.md) | LED "thở" | PWM, cập nhật duty không glitch, tái sử dụng module | v1.0 | dự kiến |
-| 03 | [`lab03_button`](labs/lab03_button/docs/spec.vi.md) | Nút nhấn ngoài | Synchronizer 2 FF, debounce, phát hiện cạnh | v1.0 | dự kiến |
+| 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/README.vi.md) | LED "thở" | PWM, cập nhật duty không glitch, tái sử dụng module | v1.1 | ✅ xong |
+| 03 | [`lab03_button`](labs/lab03_button/README.vi.md) | Nút nhấn ngoài | Synchronizer 2 FF, debounce, phát hiện cạnh | v1.1 | 🟡 xong mô phỏng + impl, chờ board |
 | 04 | [`lab04_fsm_traffic`](labs/lab04_fsm_traffic/docs/spec.vi.md) | FSM đèn giao thông | FSM Moore, mã hoá trạng thái, bộ định thời | v1.0 | dự kiến |
 | 05 | [`lab05_uart_tx`](labs/lab05_uart_tx/docs/spec.vi.md) | Bộ phát UART | Khung 8N1, chia baud, valid/ready | v1.0 | dự kiến |
 | 06 | [`lab06_uart_rx`](labs/lab06_uart_rx/docs/spec.vi.md) | Bộ thu UART + echo | Lấy mẫu giữa bit, lỗi khung, overrun | v1.0 | dự kiến |
@@ -71,6 +71,14 @@ ebaz4205-fpga-labs/
 | `lab01_top` | `labs/lab01_blink/rtl/lab01_top.v` | 01 | Reset khi bật nguồn, cực tính LED, gán chân |
 | `tb_blink_core` | `labs/lab01_blink/tb/tb_blink_core.v` | 01 | Testbench tự kiểm tra có golden model |
 | `tb_lab01_top` | `labs/lab01_blink/tb/tb_lab01_top.v` | 01 | Testbench cấp top: độ dài reset khi bật nguồn, cực tính LED |
+| `por_gen` | `labs/lab02_pwm_breathing/rtl/por_gen.v` | 02, 03 | Reset khi bật nguồn từ giá trị khởi tạo của thanh ghi |
+| `pwm_core` | `labs/lab02_pwm_breathing/rtl/pwm_core.v` | 02 | PWM W bit, duty chốt vào thanh ghi shadow khi bộ đếm quay vòng |
+| `breath_ctrl` | `labs/lab02_pwm_breathing/rtl/breath_ctrl.v` | 02 | Duty tăng giảm hình tam giác 0 → 255 → 0 |
+| `lab02_top` | `labs/lab02_pwm_breathing/rtl/lab02_top.v` | 02 | Duty bù cho xanh / đỏ, ngõ ra active-low |
+| `sync_2ff` | `labs/lab03_button/rtl/sync_2ff.v` | 03 | Synchronizer hai flip-flop có `ASYNC_REG` |
+| `debounce` | `labs/lab03_button/rtl/debounce.v` | 03 | Chống dội bằng bộ đếm, nhận mức sau `STABLE_CYCLES` mẫu bằng nhau |
+| `edge_detect` | `labs/lab03_button/rtl/edge_detect.v` | 03 | Xung rise / fall một chu kỳ có thanh ghi |
+| `lab03_top` | `labs/lab03_button/rtl/lab03_top.v` | 03 | Nút nhấn → đảo LED xanh, LED đỏ sáng khi giữ nút |
 
 Module của các lab sau được liệt kê trong spec của từng lab và sẽ thêm vào đây khi đã hiện thực.
 
@@ -109,6 +117,8 @@ Chỉ ghi kết quả lấy từ báo cáo thật của công cụ và từ lầ
 | Lab | Mô phỏng | LUT / FF | WNS (ns) | Trên board |
 |---|---|---|---|---|
 | 01 | ✅ PASS (xsim + Icarus) | 36 / 31 | 16.378 | ✅ nháy 1 Hz |
+| 02 | ✅ PASS (xsim + Icarus) | 67 / 70 | 16.218 | ✅ chu kỳ thở 2.02 s |
+| 03 | ✅ PASS (xsim + Icarus) | 27 / 35 | 15.876 | ⏳ chờ (dây 2.0 mm) |
 
 ## Ghi nhận
 

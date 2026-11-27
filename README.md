@@ -35,7 +35,7 @@ ebaz4205-fpga-labs/
 └── labs/
     ├── lab00_bringup/                 # bring-up log (README.md / README.vi.md)
     ├── lab01_blink/
-    │   ├── docs/spec.md, spec.vi.md   # interface, timing, behavior, verification plan
+    │   ├── docs/                      # spec.md / spec.vi.md, lab report (EN + VI .docx)
     │   ├── rtl/                       # synthesizable Verilog-2001 (user)
     │   ├── tb/                        # self-checking testbenches
     │   ├── constraints/               # lab XDC
@@ -52,8 +52,8 @@ ebaz4205-fpga-labs/
 |---|---|---|---|---|---|
 | 00 | [`lab00_bringup`](labs/lab00_bringup/README.md) | Board bring-up | JTAG chain, IDCODE, XADC, environment | — | ✅ done |
 | 01 | [`lab01_blink`](labs/lab01_blink/README.md) | LED blink | Clock divider, power-on reset, active-low outputs | v1.0 | ✅ done |
-| 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/docs/spec.md) | Breathing LED | PWM, glitch-free duty update, module reuse | v1.0 | planned |
-| 03 | [`lab03_button`](labs/lab03_button/docs/spec.md) | External button | 2-FF synchronizer, debounce, edge detect | v1.0 | planned |
+| 02 | [`lab02_pwm_breathing`](labs/lab02_pwm_breathing/README.md) | Breathing LED | PWM, glitch-free duty update, module reuse | v1.1 | ✅ done |
+| 03 | [`lab03_button`](labs/lab03_button/README.md) | External button | 2-FF synchronizer, debounce, edge detect | v1.1 | 🟡 sim + impl done, board pending |
 | 04 | [`lab04_fsm_traffic`](labs/lab04_fsm_traffic/docs/spec.md) | Traffic-light FSM | Moore FSM, state encoding, timers | v1.0 | planned |
 | 05 | [`lab05_uart_tx`](labs/lab05_uart_tx/docs/spec.md) | UART transmitter | 8N1 framing, baud divider, valid/ready | v1.0 | planned |
 | 06 | [`lab06_uart_rx`](labs/lab06_uart_rx/docs/spec.md) | UART receiver + echo | Mid-bit sampling, framing error, overrun | v1.0 | planned |
@@ -71,6 +71,14 @@ ebaz4205-fpga-labs/
 | `lab01_top` | `labs/lab01_blink/rtl/lab01_top.v` | 01 | Power-on reset, LED polarity, pins |
 | `tb_blink_core` | `labs/lab01_blink/tb/tb_blink_core.v` | 01 | Self-checking testbench with golden model |
 | `tb_lab01_top` | `labs/lab01_blink/tb/tb_lab01_top.v` | 01 | Top-level testbench: power-on reset length, LED polarity |
+| `por_gen` | `labs/lab02_pwm_breathing/rtl/por_gen.v` | 02, 03 | Power-on reset from register initial values |
+| `pwm_core` | `labs/lab02_pwm_breathing/rtl/pwm_core.v` | 02 | W-bit PWM, duty captured in a shadow register on counter wrap |
+| `breath_ctrl` | `labs/lab02_pwm_breathing/rtl/breath_ctrl.v` | 02 | Triangle duty ramp 0 → 255 → 0 |
+| `lab02_top` | `labs/lab02_pwm_breathing/rtl/lab02_top.v` | 02 | Complementary duty for green / red, active-low outputs |
+| `sync_2ff` | `labs/lab03_button/rtl/sync_2ff.v` | 03 | Two-flip-flop synchronizer with `ASYNC_REG` |
+| `debounce` | `labs/lab03_button/rtl/debounce.v` | 03 | Counter debouncer, accepts a level after `STABLE_CYCLES` equal samples |
+| `edge_detect` | `labs/lab03_button/rtl/edge_detect.v` | 03 | Registered one-cycle rise / fall pulses |
+| `lab03_top` | `labs/lab03_button/rtl/lab03_top.v` | 03 | Button → toggle green LED, red LED while held |
 
 Modules of later labs are listed in each lab's spec and added here when implemented.
 
@@ -109,6 +117,8 @@ Results are only reported from real tool reports and on-board tests.
 | Lab | Simulation | LUT / FF | WNS (ns) | On-board |
 |---|---|---|---|---|
 | 01 | ✅ PASS (xsim + Icarus) | 36 / 31 | 16.378 | ✅ 1 Hz blink |
+| 02 | ✅ PASS (xsim + Icarus) | 67 / 70 | 16.218 | ✅ 2.02 s breathing period |
+| 03 | ✅ PASS (xsim + Icarus) | 27 / 35 | 15.876 | ⏳ pending (2.0 mm wires) |
 
 ## Acknowledgements
 
