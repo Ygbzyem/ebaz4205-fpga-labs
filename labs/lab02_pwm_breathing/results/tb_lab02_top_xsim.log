@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# xsim v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Nov 26 16:43:52 2026
+# Process ID: 6448
+# Current directory: C:/GitHub/ebaz4205-fpga-labs/labs/lab02_pwm_breathing
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_lab02/xsim_script.tcl}
+# Log file: C:/GitHub/ebaz4205-fpga-labs/labs/lab02_pwm_breathing/xsim.log
+# Journal file: C:/GitHub/ebaz4205-fpga-labs/labs/lab02_pwm_breathing\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/tb_lab02/xsim_script.tcl
+# xsim {tb_lab02} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+=== tb_lab02_top: STEP_CYCLES = 100, POR_CYCLES = 16 (one breath = 51000 cycles) ===
+checks = 102272 (power-on reset phase: 16), periods = 398, green duty range = 1..255, errors = 0
+TEST PASSED
+$finish called at time : 2045450 ns : File "C:/GitHub/ebaz4205-fpga-labs/labs/lab02_pwm_breathing/tb/tb_lab02_top.v" Line 179
+exit
+INFO: [Common 17-206] Exiting xsim at Thu Nov 26 16:43:54 2026...
