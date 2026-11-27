@@ -14,7 +14,8 @@ board/
 └── docs/
     ├── led6_schematic.png            # dual LED wiring (polarity evidence)
     ├── x5_oscillator_schematic.png   # 50 MHz oscillator to pin N18
-    └── data_headers_schematic.png    # DATA1/2/3 header pinout
+    ├── data_headers_schematic.png    # DATA1/2/3 header pinout
+    └── s2_button_schematic.png       # on-board button S2 (PS MIO, not PL)
 ```
 
 ## Device
@@ -48,11 +49,24 @@ Both LED anodes go to VCC through 150 Ω (R45, R46); the cathodes go to W13 / W1
 
 ![LED6 wiring](docs/led6_schematic.png)
 
+## On-board Button S2 (PS only)
+
+| Item | Value |
+|---|---|
+| Pin | A17 = `PS_MIO20` (PS bank 501) |
+| Polarity | **Active-high**: pressing connects the pin to VCC; a 10 kΩ resistor (R120A) pulls it to GND when released |
+| Filter | 1 µF capacitor (C73): hardware RC debounce |
+| S3 | Footprint only, not fitted |
+
+S2 is wired to a PS MIO pin, so a PL-only design (Labs 01–08) cannot read it, and A17 cannot be used in an XDC file. It becomes usable from Lab 09, where software on the processing system reads it through the PS GPIO controller.
+
+![S2 button](docs/s2_button_schematic.png)
+
 There is also a *Done* LED (LED1) connected to the configuration `DONE` pin; it shows the configuration state and is not user-controllable. Its on/off behaviour after loading a bitstream will be recorded in Lab 01.
 
 ## DATA1 / DATA2 / DATA3 Headers
 
-2×10 pins, **2.0 mm pitch** (not 2.54 mm). Every I/O passes through a 22 Ω series resistor.
+2×10 pins, **2.0 mm pitch** (not 2.54 mm). Every I/O passes through a 22 Ω series resistor. Standard 2.54 mm female jumper wires do not fit; use **2.0 mm pitch female jumper wires**. Odd pins (1, 3, 5 …) form one row and even pins (2, 4, 6 …) the other, with pins 1 and 2 at the same end.
 
 | Pin | Function |
 |---|---|
@@ -68,7 +82,7 @@ There is also a *Done* LED (LED1) connected to the configuration `DONE` pin; it 
 
 | Lab | Signal | Header pin | FPGA pin | Wiring |
 |---|---|---|---|---|
-| 03+ | `btn_n` | DATA1-5 | A20 | Push button to GND (DATA1-4), internal `PULLUP` |
+| 03+ | `btn_n` | DATA1-5 | A20 | Push button to GND on **DATA1-12**, internal `PULLUP` (DATA1-4 sits diagonally next to DATA1-5, too close for two connectors) |
 | 05+ | `uart_txd` | DATA1-6 | H16 | To USB-UART **RXD** |
 | 06+ | `uart_rxd` | DATA1-8 | B20 | From USB-UART **TXD** |
 | 05+ | GND | DATA1-4 | — | USB-UART GND |

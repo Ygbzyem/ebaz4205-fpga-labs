@@ -14,7 +14,8 @@ board/
 └── docs/
     ├── led6_schematic.png            # sơ đồ nối LED kép (bằng chứng cực tính)
     ├── x5_oscillator_schematic.png   # thạch anh 50 MHz vào chân N18
-    └── data_headers_schematic.png    # sơ đồ chân header DATA1/2/3
+    ├── data_headers_schematic.png    # sơ đồ chân header DATA1/2/3
+    └── s2_button_schematic.png       # nút S2 trên board (thuộc PS MIO, không phải PL)
 ```
 
 ## Chip
@@ -48,11 +49,24 @@ Anode của cả hai LED nối lên VCC qua điện trở 150 Ω (R45, R46), cat
 
 ![Sơ đồ LED6](docs/led6_schematic.png)
 
+## Nút S2 trên board (chỉ dùng từ PS)
+
+| Mục | Giá trị |
+|---|---|
+| Chân | A17 = `PS_MIO20` (bank 501 của PS) |
+| Cực tính | **Tích cực mức cao**: nhấn thì chân nối lên VCC; khi thả, điện trở 10 kΩ (R120A) kéo chân xuống GND |
+| Lọc | Tụ 1 µF (C73): chống dội bằng mạch RC phần cứng |
+| S3 | Chỉ có chỗ hàn, không gắn nút |
+
+S2 nối vào một chân MIO của PS, nên thiết kế chỉ dùng PL (Lab 01–08) không đọc được nó, và không thể khai báo A17 trong file XDC. Nút này dùng được từ Lab 09, khi phần mềm chạy trên hệ thống xử lý đọc nó qua bộ GPIO của PS.
+
+![Nút S2](docs/s2_button_schematic.png)
+
 Ngoài ra có LED *Done* (LED1) nối với chân `DONE` của khối cấu hình: nó báo trạng thái cấu hình, người dùng không điều khiển được. LED này sáng hay tắt sau khi nạp bitstream sẽ được ghi lại ở Lab 01.
 
 ## Header DATA1 / DATA2 / DATA3
 
-2×10 chân, **bước chân 2.0 mm** (không phải 2.54 mm). Mỗi chân I/O đi qua một điện trở nối tiếp 22 Ω.
+2×10 chân, **bước chân 2.0 mm** (không phải 2.54 mm). Mỗi chân I/O đi qua một điện trở nối tiếp 22 Ω. Dây cắm đầu cái 2.54 mm thông thường không cắm được; cần dùng **dây cắm đầu cái bước 2.0 mm**. Các chân lẻ (1, 3, 5 …) nằm một hàng, các chân chẵn (2, 4, 6 …) nằm hàng kia, chân 1 và 2 cùng ở một đầu.
 
 | Chân | Chức năng |
 |---|---|
@@ -68,7 +82,7 @@ Ngoài ra có LED *Done* (LED1) nối với chân `DONE` của khối cấu hìn
 
 | Lab | Tín hiệu | Chân header | Chân FPGA | Cách nối |
 |---|---|---|---|---|
-| 03+ | `btn_n` | DATA1-5 | A20 | Nút nhấn nối xuống GND (DATA1-4), bật `PULLUP` bên trong |
+| 03+ | `btn_n` | DATA1-5 | A20 | Nút nhấn nối xuống GND ở **DATA1-12**, bật `PULLUP` bên trong (DATA1-4 nằm chéo sát DATA1-5, quá gần để cắm hai đầu dây) |
 | 05+ | `uart_txd` | DATA1-6 | H16 | Vào chân **RXD** của USB-UART |
 | 06+ | `uart_rxd` | DATA1-8 | B20 | Từ chân **TXD** của USB-UART |
 | 05+ | GND | DATA1-4 | — | GND của USB-UART |
