@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# xsim v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Nov 26 18:31:09 2026
+# Process ID: 23900
+# Current directory: C:/GitHub/ebaz4205-fpga-labs/labs/lab03_button
+# Command line: xsim.exe -mode tcl -source {xsim.dir/tb_lab03/xsim_script.tcl}
+# Log file: C:/GitHub/ebaz4205-fpga-labs/labs/lab03_button/xsim.log
+# Journal file: C:/GitHub/ebaz4205-fpga-labs/labs/lab03_button\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/tb_lab03/xsim_script.tcl
+# xsim {tb_lab03} -autoloadwcfg -runall
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+run -all
+=== tb_lab03_top: STABLE_CYCLES = 20, POR_CYCLES = 16, 5 presses ===
+checks = 1454 (power-on reset phase: 16), green toggles = 5, red presses = 5, errors = 0
+TEST PASSED
+$finish called at time : 29100 ns : File "C:/GitHub/ebaz4205-fpga-labs/labs/lab03_button/tb/tb_lab03_top.v" Line 165
+exit
+INFO: [Common 17-206] Exiting xsim at Thu Nov 26 18:31:11 2026...
